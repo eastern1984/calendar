@@ -1,7 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import 'moment/locale/ru';
-import Head from 'next/head';
 import Layout from '../components/layout/Layout';
 import { ThemeProvider } from "@mui/material/styles";
 import getTheme from '../components/layout/theme';
