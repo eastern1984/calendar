@@ -3,6 +3,7 @@
     "footer.info": "© 2022 Patriarchal Exarchate of South-East Asia (Moscow Patriarchate)",
     "logo": "/images/logo-en.png",
     "menu.calendar": "Calendar",
-    "menu.dayEvent": "Day Events",
+    "menu.dayEvent": "Day Events Table",
+    "menu.dayTable": "Day Content Table",
     "menu.contacts": "Contacts"
 }

@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 //import { getSession } from "../helpers/sessionToken";
 import { IAxiosBaseContext } from "../interfaces/types";
+import { IDayContent } from "../models/DayContent";
 import { IDayEvent } from "../models/DayEvent";
 
 export const getMonthMIReport = (month: string, year: string) => {
@@ -66,6 +67,28 @@ export const axiosRequests = (instance: AxiosInstance) => {
         },
         postDayEvent: async params => {
             const { data } = await instance.post<any>(`/day-event`, params.body);
+            return data;
+        },
+        getDayContent: async (id: string) => {
+            const { data } = await instance.get<{ data: IDayContent }>(`/day-content/${id}`);
+            return data.data;
+        },
+        getDayContents: async (filter: string, page: number, limit: number) => {
+            const { data } = await instance.get<{ data: any }>(
+                `/day-contents?DayContentNumber=${filter}&page=${page}&limit=${limit}`,
+            );
+            return data.data;
+        },
+        deleteDayContent: async (id: string) => {
+            const { data } = await instance.delete(`/day-content/${id}`);
+            return data.data;
+        },
+        putDayContent: async params => {
+            const { data } = await instance.put<any>(`/day-content`, params.body);
+            return data;
+        },
+        postDayContent: async params => {
+            const { data } = await instance.post<any>(`/day-content`, params.body);
             return data;
         },
     } as IAxiosBaseContext;

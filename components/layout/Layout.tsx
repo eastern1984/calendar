@@ -18,6 +18,7 @@ import moment from 'moment';
 const getMenu = (intl: IntlShape) => [
     { title: intl.formatMessage({ id: "menu.calendar" }), icon: <CalendarMonthIcon />, link: Routes.CALENDAR },
     { title: intl.formatMessage({ id: "menu.dayEvent" }), icon: <TableViewIcon />, link: Routes.TABLE },
+    { title: intl.formatMessage({ id: "menu.dayTable" }), icon: <TableViewIcon />, link: Routes.TABLE_CONTENT },
     { title: intl.formatMessage({ id: "menu.contacts" }), icon: <ContactSupportIcon />, link: Routes.CONTACTS }
 ];
 
