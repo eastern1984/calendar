@@ -13,7 +13,7 @@ interface IProps {
 const Day: React.FC = ({ }) => {
     const { query } = useRouter();
     const date = (query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MMMM-DD-YYYY') : moment();
-    const { data, isFetching } = useGetDayQuery(date.format('YYYY'), date.format('MMMM'), date.format('DD'));
+    const { data, isFetching } = useGetDayQuery(date.format('YYYY'), date.locale('en').format('MMMM'), date.format('DD'));
 
     return (
         <Box position="relative">

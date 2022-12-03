@@ -28,7 +28,6 @@ const getMenu = (intl: IntlShape) => [
 const Sidebar: React.FC<IProps> = ({ intl, onClick }) => {
     const { push, query } = useRouter();
     const [date, setDate] = useState<Moment | null>((query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MMMM-DD-YYYY') : moment());
-
     const handleChange = (newValue: Moment | null) => {
         setDate(newValue);
         push(newValue ? `/${newValue.format('YYYY')}/${newValue.format('MMMM')}/${newValue.format('DD')}` : "/");
