@@ -15,7 +15,7 @@ export interface IContent {
 
 export interface IDayContent {
     content: IContent[];
-    date: number;
+    date: string;
     _id?: string;
     deleted?: boolean;
 }
@@ -40,7 +40,7 @@ const schema = new mongoose.Schema({
             ]
         }
     ],
-    date: Number
+    date: String
 });
 
 export default mongoose.models?.DayContent || mongoose.model<IDayContentSchema>('DayContent', schema);

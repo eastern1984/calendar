@@ -8,6 +8,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useCreateDayContentMutation, useUpdateDayContentMutation } from '../../../requests/hooks/dayContentHooks';
+import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
+import BackDrop from '../../common/BackDrop';
 
 const EMPTY_EVENT = {
     category: 0,
@@ -22,7 +24,7 @@ const INIT_DATA: IDayContent = {
         { lang: "ru", events: [{ ...EMPTY_EVENT },] },
         { lang: "en", events: [{ ...EMPTY_EVENT }] }
     ],
-    date: moment().unix()
+    date: moment().format(DATE_CONTENT_FORMAT)
 };
 
 interface IProps {
@@ -32,8 +34,8 @@ interface IProps {
 }
 
 const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
-    const { mutate: create, isLoading } = useCreateDayContentMutation();
-    const { mutate: update, isLoading: isUpdating } = useUpdateDayContentMutation();
+    const { mutate: create, isLoading, isSuccess } = useCreateDayContentMutation();
+    const { mutate: update, isLoading: isUpdating, isSuccess: isUpdated } = useUpdateDayContentMutation();
     const [data, setData] = useState<IDayContent>(dayContent ? { ...dayContent } : { ...INIT_DATA });
 
     const addItemToEvents = (lang: string) => {
@@ -83,14 +85,21 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
     }
 
     useEffect(() => {
-        if (dayContent) {
-            setData({ ...dayContent })
-        }
+        //  if (dayContent) {
+        setData(dayContent ? { ...dayContent } : INIT_DATA)
+        //  }
     }, [dayContent])
-    console.log(data._id);
+
+    useEffect(() => {
+        if (isUpdated || isSuccess) {
+            onClose();
+        }
+    }, [isUpdated, isSuccess])
+
     return (
         <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
             <Box component="form">
+                {(isLoading || isUpdating) && <BackDrop />}
                 <DialogTitle>Ручное редактирование каледарного дня</DialogTitle>
                 <DialogContent>
 
@@ -100,14 +109,14 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
                             <Box sx={{ width: "200px" }}>
                                 <DesktopDatePicker
                                     inputFormat="MM/DD/YYYY"
-                                    value={moment.unix(data.date) || moment()}
-                                    onChange={(v: Moment | null) => setData({ ...data, date: (v?.unix() || 0) })}
+                                    value={data && data.date ? moment(data.date, DATE_CONTENT_FORMAT) : moment()}
+                                    onChange={(v: Moment | null) => setData({ ...data, date: (v || moment()).format(DATE_CONTENT_FORMAT) })}
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </Box>
                         </Stack>
 
-                        {data.content.map((v: IContent, index) => (
+                        {data?.content.map((v: IContent, index) => (
                             <Stack spacing={1} minWidth={"100%"} key={v.lang}>
                                 <Typography variant='h4'>Описание дня {v.lang.toUpperCase()}</Typography>
                                 {v.events.map((event, index) => (

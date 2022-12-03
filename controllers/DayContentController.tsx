@@ -1,8 +1,13 @@
 import DayContent from '../models/DayContent';
 import type { NextApiRequest, NextApiResponse } from 'next'
+import moment from 'moment';
 
-export const getDayData = async () => {
-    const data = await DayContent.find();
+export const DATE_CONTENT_FORMAT = 'MM-DD-YYYY';
+
+export const getDayData = async (req: NextApiRequest) => {
+    const { query } = req;
+    const date = (query && query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MMMM-DD-YYYY') : moment()
+    const data = await DayContent.findOne({ date: date.format(DATE_CONTENT_FORMAT) });
     return data;
 };
 

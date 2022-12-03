@@ -15,7 +15,7 @@ export enum Routes {
 }
 
 export interface IAxiosBaseContext {
-    getDayData: () => Promise<any>;
+    getDayData: (year: string, month: string, day: string) => Promise<any>;
     getDayEvent: (id: string) => Promise<any>;
     getDayEvents: (filter: string, page: number, limit: number) => Promise<any>;
     deleteDayEvent: (id: string) => Promise<any>;

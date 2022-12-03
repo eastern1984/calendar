@@ -43,8 +43,8 @@ export const getMonthMIReport = (month: string, year: string) => {
 
 export const axiosRequests = (instance: AxiosInstance) => {
     return {
-        getDayData: async () => {
-            const { data } = await instance.post<{ data: any }>("/day",);
+        getDayData: async (year: string, month: string, day: string) => {
+            const { data } = await instance.post<{ data: any }>(`/day?year=${year}&month=${month}&day=${day}`,);
             return data.data;
         },
         getDayEvent: async (id: string) => {

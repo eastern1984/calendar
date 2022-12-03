@@ -1,11 +1,6 @@
 import DayEvent from '../models/DayEvent';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export const getDayData = async () => {
-    const data = await DayEvent.find();
-    return data;
-};
-
 export const createDayEventData = async (req: NextApiRequest) => {
     const { body } = req;
     const deyEvent = new DayEvent();
