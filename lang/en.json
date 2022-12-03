@@ -5,5 +5,6 @@
     "menu.calendar": "Calendar",
     "menu.dayEvent": "Day Events Table",
     "menu.dayTable": "Day Content Table",
-    "menu.contacts": "Contacts"
+    "menu.contacts": "Contacts",
+    "liturgy": "Liturgy"
 }

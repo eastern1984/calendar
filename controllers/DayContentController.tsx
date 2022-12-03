@@ -7,7 +7,7 @@ export const DATE_CONTENT_FORMAT = 'MM-DD-YYYY';
 export const getDayData = async (req: NextApiRequest) => {
     const { query } = req;
     moment.locale('en');
-    const date = (query && query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MMMM-DD-YYYY') : moment()
+    const date = (query && query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MM-DD-YYYY') : moment()
     const data = await DayContent.findOne({ date: date.format(DATE_CONTENT_FORMAT) });
     return data;
 };
