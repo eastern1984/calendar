@@ -2,8 +2,9 @@ import { Box, Paper, Typography, List, Stack, ListItemAvatar, Avatar, ListItemTe
 import { useIntl } from 'react-intl';
 import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
 import { IDayContent } from '../../../models/DayContent';
-import { CATEGORY, SAINT_TYPE } from '../../../models/DayEvent';
+import { SERVICE_TYPE, SAINT_TYPE, CATEGORY } from '../../../models/DayEvent';
 import moment from 'moment';
+import Image from 'next/image';
 
 interface IProps {
     dayContent: IDayContent | null;
@@ -31,7 +32,10 @@ const DayView: React.FC<IProps> = ({ dayContent }) => {
                 <List sx={{ width: '100%', bgcolor: 'background.paper', mb: "16px" }}>
                     <Stack spacing={1}>
                         {dayContent?.content.find(v => v.lang == intl.locale)?.events.map(v => (
-                            <Box key={v.title}>
+                            <Stack key={v.title} direction="row" spacing={1}>
+                                {!SERVICE_TYPE[v.serviceType].img ? "" : (v.category === 2) ?
+                                    <Image src={"/images/1-holiday.gif"} alt="" width={25} height={20} /> :
+                                    (v.serviceType !== null) && <Image src={SERVICE_TYPE[v.serviceType].img} alt="" width={20} height={20} />}
                                 {(v.category !== 1) &&
                                     <Typography
                                         component="span"
@@ -50,7 +54,7 @@ const DayView: React.FC<IProps> = ({ dayContent }) => {
                                         {intl.formatMessage({ id: "liturgy" })} {v.title}
                                     </Typography>
                                 }
-                            </Box>
+                            </Stack>
                         ))}
                     </Stack>
                 </List>

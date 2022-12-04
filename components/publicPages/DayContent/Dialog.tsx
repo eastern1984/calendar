@@ -133,7 +133,7 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
                                             <InputLabel>Служба</InputLabel>
                                             <Select value={event.serviceType} label="Служба" name="serviceType" onChange={(e) => setType(index, v.lang, e.target.value as number, "SERVICE_TYPE")}>
                                                 {SERVICE_TYPE.map((v, index) => (
-                                                    <MenuItem key={v} value={index}>{v}</MenuItem>
+                                                    <MenuItem key={v.name} value={index}>{v.name}</MenuItem>
                                                 ))}
                                             </Select>
                                         </FormControl>

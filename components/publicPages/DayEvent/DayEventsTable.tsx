@@ -34,7 +34,7 @@ const DayEventsTable: React.FC<IProps> = ({ }) => {
                             <TableRow key={v._id}>
                                 <TableCell>{v.date}</TableCell>
                                 <TableCell>{(v.category !== undefined) ? CATEGORY[v.category] : "-"}</TableCell>
-                                <TableCell>{(v.serviceType !== undefined) ? SERVICE_TYPE[v.serviceType] : "-"}</TableCell>
+                                <TableCell>{(v.serviceType !== undefined) ? SERVICE_TYPE[v.serviceType].name : "-"}</TableCell>
                                 <TableCell>{(v.saintType !== undefined) ? SAINT_TYPE[v.saintType] : "-"}</TableCell>
                                 <TableCell>{v.titles[0]?.text}</TableCell>
                                 <TableCell>{v.titles[1]?.text}</TableCell>

@@ -5,7 +5,11 @@ export const CATEGORY = [
 ]
 
 export const SERVICE_TYPE = [
-    'Бдение', 'Шестеричная', 'Полиелей'
+    { name: 'Нет Знака', img: "" },
+    { name: 'Бдение', img: "/images/2-holiday.svg" },
+    { name: 'Полиелей', img: "/images/3-holiday.svg" },
+    { name: 'Славословие', img: "/images/4-holiday.svg" },
+    { name: 'Шестеричная', img: "/images/5-holiday.svg" },
 ]
 
 export const SAINT_TYPE = [

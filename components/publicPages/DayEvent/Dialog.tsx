@@ -97,7 +97,7 @@ const DayEventDialog: React.FC<IProps> = ({ open, onClose, dayEvent }) => {
                                 <InputLabel>Служба</InputLabel>
                                 <Select value={values.serviceType} label="Служба" name="serviceType" onChange={handleChange}>
                                     {SERVICE_TYPE.map((v, index) => (
-                                        <MenuItem key={v} value={index}>{v}</MenuItem>
+                                        <MenuItem key={v.name} value={index}>{v.name}</MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>

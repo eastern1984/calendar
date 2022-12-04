@@ -1,6 +1,5 @@
 import { Stack, Button, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Backdrop } from '@mui/material'
 import { useState } from 'react'
-import { IDayEvent, CATEGORY, SERVICE_TYPE, SAINT_TYPE } from '../../../models/DayEvent';
 import { useGetDayContentsQuery } from '../../../requests/hooks/dayContentHooks';
 import moment, { Moment } from 'moment';
 import { IDayContent } from '../../../models/DayContent';
