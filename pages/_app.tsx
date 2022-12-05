@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app'
 import 'moment/locale/ru';
 import Layout from '../components/layout/Layout';
@@ -34,6 +35,11 @@ const messages: any = {
 
 export default function App({ Component, pageProps }: AppProps) {
   const { locale } = useRouter();
+  const [isSSR, setIsSSR] = useState(true);
+
+  useEffect(() => {
+    setIsSSR(false);
+  }, []);
 
   return (
     <>
@@ -42,9 +48,11 @@ export default function App({ Component, pageProps }: AppProps) {
           <AxiosInstanceProvider>
             <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={locale}>
               <ThemeProvider theme={getTheme()}>
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
+                {!isSSR &&
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                }
               </ThemeProvider>
             </LocalizationProvider>
           </AxiosInstanceProvider>
