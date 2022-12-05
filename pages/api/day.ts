@@ -10,5 +10,5 @@ export default async function handler(
     await dbConnect();
     const data = await getDayData(req);
 
-    res.status(200).json({ name: 'John Doe', data })
+    res.status(200).json({ data })
 }

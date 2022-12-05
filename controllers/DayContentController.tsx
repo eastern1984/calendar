@@ -1,15 +1,29 @@
 import DayContent from '../models/DayContent';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import moment from 'moment';
+import DayEvent, { getLangContentFromEvent, IDayEvent } from '../models/DayEvent';
 
 export const DATE_CONTENT_FORMAT = 'MM-DD-YYYY';
+export const DATE_EVENT_FORMAT = 'MM-DD';
 
 export const getDayData = async (req: NextApiRequest) => {
     const { query } = req;
     moment.locale('en');
     const date = (query && query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MM-DD-YYYY') : moment()
     const data = await DayContent.findOne({ date: date.format(DATE_CONTENT_FORMAT) });
-    return data;
+
+    const events = await DayEvent.find({ date: date.format(DATE_EVENT_FORMAT) });
+    const eventsAsContent = {
+        date: date.format(DATE_CONTENT_FORMAT),
+        content: (process.env.CSV_SUPPORT_LANGUAGES || "").split(",").map(v => {
+            return {
+                lang: v,
+                events: events.map(event => ({ ...getLangContentFromEvent(v, event as IDayEvent) })),
+            }
+        })
+    }
+
+    return data ? { ...data._doc, _id: undefined } : { ...eventsAsContent };
 };
 
 export const createDayContentData = async (req: NextApiRequest) => {

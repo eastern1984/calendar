@@ -27,7 +27,7 @@ export interface IDayEvent {
     deleted?: boolean;
 }
 
-interface IDayEventSchema extends IDayEvent {
+export interface IDayEventSchema extends IDayEvent {
     _id: string;
 }
 
@@ -39,5 +39,14 @@ const schema = new mongoose.Schema({
     titles: [{ text: String, lang: String }],
     year: String
 });
+
+export const getLangContentFromEvent = (lang: string, event: IDayEvent) => ({
+    category: event.category,
+    serviceType: event.serviceType,
+    saintType: event.saintType,
+    title: event.titles.find(v => v.lang === lang)?.text || "",
+    year: event.year
+})
+
 
 export default mongoose.models?.DayEvent || mongoose.model<IDayEventSchema>('DayEvent', schema);

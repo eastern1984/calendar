@@ -1,6 +1,6 @@
 import { IconButton, Divider, Box, Typography, Stack, Dialog, DialogTitle, DialogContent, Button, DialogActions, TextField, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
 import { useState, useEffect } from 'react';
-import moment, { Moment } from 'moment';
+import moment, { Moment, months } from 'moment';
 import { CATEGORY, SAINT_TYPE, SERVICE_TYPE } from '../../../models/DayEvent';
 import { IContent, IDayContent } from '../../../models/DayContent';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
@@ -10,6 +10,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useCreateDayContentMutation, useUpdateDayContentMutation } from '../../../requests/hooks/dayContentHooks';
 import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
 import BackDrop from '../../common/BackDrop';
+import { useGetDayQuery } from '../../../requests/hooks/calendarHooks';
+import Month from '../Month/Month';
 
 const EMPTY_EVENT = {
     category: 0,
@@ -37,6 +39,15 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
     const { mutate: create, isLoading, isSuccess } = useCreateDayContentMutation();
     const { mutate: update, isLoading: isUpdating, isSuccess: isUpdated } = useUpdateDayContentMutation();
     const [data, setData] = useState<IDayContent>(dayContent ? { ...dayContent } : { ...INIT_DATA });
+
+    const currentDate = { year: data.date.split('-')[2], months: data.date.split('-')[0], day: data.date.split('-')[1] }
+    const { data: oldData, isFetching } = useGetDayQuery(currentDate.year, currentDate.months, currentDate.day, !!data?.date);
+
+    useEffect(() => {
+        if (!data.content[0]?.events[0]?.title && !data.content[1]?.events[0]?.title && oldData && !isFetching) {
+            setData({ ...oldData });
+        }
+    }, [oldData, isFetching]);
 
     const addItemToEvents = (lang: string) => {
         setData({ ...data, content: data.content.map(v => (v.lang === lang) ? { ...v, events: [...v.events, { ...EMPTY_EVENT }] } : v) });
@@ -92,14 +103,15 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
 
     useEffect(() => {
         if (isUpdated || isSuccess) {
+            setData(INIT_DATA);
             onClose();
         }
     }, [isUpdated, isSuccess])
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
+        <Dialog open={open} onClose={() => { setData(INIT_DATA); onClose(); }} maxWidth="lg" fullWidth>
             <Box component="form">
-                {(isLoading || isUpdating) && <BackDrop />}
+                {(isLoading || isUpdating || isFetching) && <BackDrop />}
                 <DialogTitle>Ручное редактирование каледарного дня</DialogTitle>
                 <DialogContent>
 
@@ -173,7 +185,7 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
 
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={onClose} color="secondary" variant='contained'>Отмена</Button>
+                    <Button onClick={() => { setData(INIT_DATA); onClose(); }} color="secondary" variant='contained'>Отмена</Button>
                     <Button variant='contained' onClick={() => { data._id ? update({ body: { ...data } }) : create({ body: { ...data } }) }}>Создать</Button>
                 </DialogActions>
             </Box>

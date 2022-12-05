@@ -59,8 +59,8 @@ const DayEventDialog: React.FC<IProps> = ({ open, onClose, dayEvent }) => {
         onSubmit: handleDialogSubmit,
     });
 
-    const updateDate = (day: string, month: string) => {
-        setValues((prev: any) => ({ ...prev, 'date': `${day}.${month}` }));
+    const updateDate = (day: string, month: number) => {
+        setValues((prev: any) => ({ ...prev, 'date': `${month}-${day}` }));
     }
 
     return (
@@ -72,10 +72,10 @@ const DayEventDialog: React.FC<IProps> = ({ open, onClose, dayEvent }) => {
                     <Stack spacing={2}>
                         <Typography variant='h4'>День/месяц празднования</Typography>
                         <Stack spacing={2} mt="16px" direction={"row"} maxWidth="300px">
-                            <TextField label="День" onChange={(e) => { updateDate(e.target.value, values.date?.split('.')[1]) }} value={values.date?.split('.')[0] || ""} type="number" />
+                            <TextField label="День" onChange={(e) => { updateDate(e.target.value, parseInt(values.date?.split('-')[0])) }} value={values.date?.split('-')[1] || ""} type="number" />
                             <FormControl fullWidth>
                                 <InputLabel>Месяц</InputLabel>
-                                <Select value={values.date?.split('.')[1] || ""} label="Ранг" onChange={(e) => { updateDate(values.date?.split('.')[0], e.target.value) }}                        >
+                                <Select value={(parseInt(values.date?.split('-')[0]) - 1) || ""} label="Ранг" onChange={(e) => { updateDate(values.date?.split('-')[1], (e.target.value as number) + 1) }}                        >
                                     {MONTHS.map((v, index) => (
                                         <MenuItem key={v} value={index}>{v}</MenuItem>
                                     ))}
