@@ -6,5 +6,9 @@
     "menu.dayEvent": "Таблица событий по дням",
     "menu.dayTable": "Таблица контента дней",
     "menu.contacts": "Контакты",
-    "liturgy": "Литургия"
+    "liturgy": "Литургия",
+    "week": "Седмица",
+    "weekNumberEnd": "я",
+    "afterPentecost": "по Пятидесятнице",
+    "glas": "Глас"
 }

@@ -6,5 +6,9 @@
     "menu.dayEvent": "Day Events Table",
     "menu.dayTable": "Day Content Table",
     "menu.contacts": "Contacts",
-    "liturgy": "Liturgy"
+    "liturgy": "Liturgy",
+    "week": "Week",
+    "weekNumberEnd": "th",
+    "afterPentecost": "after Pentecost",
+    "glas": "Glas"
 }

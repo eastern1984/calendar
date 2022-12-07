@@ -79,3 +79,12 @@ export const getWeeksToNextEaster = (date: Moment) => {
     const easter = getNextEaster(date);
     return date?.diff(easter, 'weeks');
 }
+
+export const getWeekInfo = (date: Moment) => {
+    return {
+        weekNumberFromPentecost: Math.floor((getDaysFromEaster(date) / 7) - 6),
+        glas: Math.floor(((getDaysFromEaster(date) + 1) / 7 - 1) % 8 + 1),
+        test3: getWeeksFromEaster(date),
+        test4: getWeeksToNextEaster(date),
+    }
+}

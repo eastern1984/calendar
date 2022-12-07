@@ -14,15 +14,17 @@ const DayView: React.FC<IProps> = ({ dayContent }) => {
     const intl = useIntl();
     const date = dayContent ? moment(dayContent.date, DATE_CONTENT_FORMAT) : moment();
     const oldStyleDate = dayContent ? moment(dayContent.date, DATE_CONTENT_FORMAT).add("-13", "d") : moment().add("-13", "d");
+    const content = dayContent?.content.find(v => v.lang == intl.locale);
     let weekDayName = date.locale(intl.locale).format("dddd");
     weekDayName = weekDayName.charAt(0).toUpperCase() + weekDayName.slice(1);
+    const weekInfo = `${intl.formatMessage({ id: "week" })} ${(content?.weekInfo as any)?.weekNumberFromPentecost}-${intl.formatMessage({ id: "weekNumberEnd" })} ${intl.formatMessage({ id: "afterPentecost" })}. ${intl.formatMessage({ id: "glas" })} ${(content?.weekInfo as any)?.glas}.`;
 
     return (
         <Stack spacing={{ xs: 1, sm: 2 }}>
             <Paper elevation={0} sx={{ p: { xs: 1, sm: 2 } }}>
 
                 <Typography variant="h3" mb={2}> {weekDayName} {date.locale(intl.locale).format("DD MMMM YYYY")} / {oldStyleDate.locale(intl.locale).format("DD MMMM YYYY")}</Typography>
-                <Typography variant="h4" mb={2}> Седмица 25-я по Пятидесятнице. Глас седьмый.</Typography>
+                <Typography variant="h4" mb={2}> {weekInfo}</Typography>
                 <Typography variant="h5" mb={2}>
                     2 Сол., 274 зач., I, 1–10. Лк., 75 зач., XIV, 12–15. Мч.: Еф., 233 зач., VI, 10–17. Лк., 64 зач., XII, 8–12.
                 </Typography>

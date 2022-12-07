@@ -2,6 +2,7 @@ import DayContent from '../models/DayContent';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import moment from 'moment';
 import DayEvent, { getLangContentFromEvent, IDayEvent } from '../models/DayEvent';
+import { getDaysFromEaster, getDaysToNextEaster, getWeekInfo, getWeeksFromEaster, getWeeksToNextEaster } from '../helpers/tipikonCalculations';
 
 export const DATE_CONTENT_FORMAT = 'MM-DD-YYYY';
 export const DATE_EVENT_FORMAT = 'MM-DD';
@@ -17,6 +18,7 @@ export const getDayData = async (req: NextApiRequest) => {
         date: date.format(DATE_CONTENT_FORMAT),
         content: (process.env.CSV_SUPPORT_LANGUAGES || "").split(",").map(v => {
             return {
+                weekInfo: getWeekInfo(date),
                 lang: v,
                 events: events.map(event => ({ ...getLangContentFromEvent(v, event as IDayEvent) })),
             }
