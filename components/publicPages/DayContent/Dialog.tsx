@@ -23,8 +23,8 @@ const EMPTY_EVENT = {
 
 const INIT_DATA: IDayContent = {
     content: [
-        { lang: "ru", events: [{ ...EMPTY_EVENT },] },
-        { lang: "en", events: [{ ...EMPTY_EVENT }] }
+        { lang: "ru", description: "", readings: "", weekInfo: "", events: [{ ...EMPTY_EVENT },] },
+        { lang: "en", description: "", readings: "", weekInfo: "", events: [{ ...EMPTY_EVENT }] }
     ],
     date: moment().format(DATE_CONTENT_FORMAT)
 };
@@ -131,6 +131,24 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
                         {data?.content.map((v: IContent, index) => (
                             <Stack spacing={1} minWidth={"100%"} key={v.lang}>
                                 <Typography variant='h4'>Описание дня {v.lang.toUpperCase()}</Typography>
+                                <TextField
+                                    label="Описание седмицы"
+                                    onChange={(e) => setData({ ...data, content: data.content.map(content => (content.lang === v.lang) ? { ...content, weekInfo: e.target.value } : content) })}
+                                    value={v.weekInfo}
+                                    fullWidth
+                                />
+                                <TextField
+                                    label="Чтения"
+                                    onChange={(e) => setData({ ...data, content: data.content.map(content => (content.lang === v.lang) ? { ...content, readings: e.target.value } : content) })}
+                                    value={v.readings}
+                                    fullWidth
+                                />
+                                <TextField
+                                    label="Дополнительная информация"
+                                    onChange={(e) => setData({ ...data, content: data.content.map(content => (content.lang === v.lang) ? { ...content, description: e.target.value } : content) })}
+                                    value={v.description}
+                                    fullWidth
+                                />
                                 {v.events.map((event, index) => (
                                     <Stack direction={"row"} spacing={1} key={index}>
                                         <FormControl sx={{ minWidth: "100px" }} >

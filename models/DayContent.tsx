@@ -9,6 +9,9 @@ export interface IEvent {
 }
 
 export interface IContent {
+    weekInfo: string,
+    readings: string,
+    description: string,
     lang: string,
     events: IEvent[]
 }
@@ -28,6 +31,9 @@ interface IDayContentSchema extends IDayContent {
 const schema = new mongoose.Schema({
     content: [
         {
+            weekInfo: String,
+            readings: String,
+            description: String,
             lang: String,
             events: [
                 {
