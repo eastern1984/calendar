@@ -82,8 +82,8 @@ export const getWeeksToNextEaster = (date: Moment) => {
 
 export const getWeekInfo = (date: Moment) => {
     return {
-        weekNumberFromPentecost: Math.floor((getDaysFromEaster(date) / 7) - 6),
-        glas: Math.floor(((getDaysFromEaster(date) + 1) / 7 - 1) % 8 + 1),
+        weekNumberFromPentecost: Math.floor(((getDaysFromEaster(date) - 1) / 7) - 6),
+        glas: Math.floor((getDaysFromEaster(date) / 7 - 1) % 8 + 1),
         test3: getWeeksFromEaster(date),
         test4: getWeeksToNextEaster(date),
     }

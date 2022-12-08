@@ -61,8 +61,8 @@ const Sidebar: React.FC<IProps> = ({ intl, onClick }) => {
             </List>
             <Divider />
             <StaticDatePicker
+            
                 displayStaticWrapperAs="desktop"
-                openTo="day"
                 value={date}
                 onChange={handleChange}
                 renderInput={(params) => <TextField {...params} />}

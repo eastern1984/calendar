@@ -1,7 +1,6 @@
 import '../styles/globals.css'
 import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app'
-import 'moment/locale/ru';
 import Layout from '../components/layout/Layout';
 import { ThemeProvider } from "@mui/material/styles";
 import getTheme from '../components/layout/theme';
@@ -13,6 +12,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AxiosInstanceProvider } from '../requests/axios';
 import { QueryClientProvider, QueryClient } from "react-query";
+import 'moment/locale/ru';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <IntlProvider locale={locale || "en"} messages={messages[locale || "en"]}>
         <QueryClientProvider client={queryClient}>
           <AxiosInstanceProvider>
-            <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale={locale}>
+            <LocalizationProvider dateAdapter={AdapterMoment} >
               <ThemeProvider theme={getTheme()}>
                 {!isSSR &&
                   <Layout>
