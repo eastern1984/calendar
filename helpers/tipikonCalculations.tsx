@@ -1,4 +1,5 @@
 import moment, { Moment } from "moment";
+import { READINGS_TABLE } from "./readings";
 
 const EASTER_BY_YEARS = [
     { year: 2022, day: "4-24" },
@@ -78,6 +79,11 @@ export const getWeeksFromEaster = (date: Moment) => {
 export const getWeeksToNextEaster = (date: Moment) => {
     const easter = getNextEaster(date);
     return date?.diff(easter, 'weeks');
+}
+
+export const getReadings = (date: Moment) => {
+    const readings = READINGS_TABLE[getDaysFromEaster(date)].split('|');
+    return { apostol: readings[0], gospel: readings[1] };
 }
 
 export const getWeekInfo = (date: Moment) => {

@@ -9,10 +9,12 @@ import { useRouter } from 'next/router';
 import ru from "../lang/ru.json";
 import en from "../lang/en.json";
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AxiosInstanceProvider } from '../requests/axios';
 import { QueryClientProvider, QueryClient } from "react-query";
 import 'moment/locale/ru';
+import 'dayjs/locale/ru';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,7 +48,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <IntlProvider locale={locale || "en"} messages={messages[locale || "en"]}>
         <QueryClientProvider client={queryClient}>
           <AxiosInstanceProvider>
-            <LocalizationProvider dateAdapter={AdapterMoment} >
+            <LocalizationProvider dateAdapter={AdapterDayjs} locale={locale || "en"}>
               <ThemeProvider theme={getTheme()}>
                 {!isSSR &&
                   <Layout>

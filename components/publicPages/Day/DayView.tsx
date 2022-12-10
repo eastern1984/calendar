@@ -25,9 +25,7 @@ const DayView: React.FC<IProps> = ({ dayContent }) => {
 
                 <Typography variant="h3" mb={2}> {weekDayName} {date.locale(intl.locale).format("DD MMMM YYYY")} / {oldStyleDate.locale(intl.locale).format("DD MMMM YYYY")}</Typography>
                 <Typography variant="h4" mb={2}> {weekInfo}</Typography>
-                <Typography variant="h5" mb={2}>
-                    2 Сол., 274 зач., I, 1–10. Лк., 75 зач., XIV, 12–15. Мч.: Еф., 233 зач., VI, 10–17. Лк., 64 зач., XII, 8–12.
-                </Typography>
+                <Typography variant="h5" mb={2}>{content?.readings}</Typography>
                 <Typography variant="h5" mb={2}> Рождественский пост. Монастырский устав: cухоядение (хлеб, овощи, фрукты)</Typography>
             </Paper >
             <Paper elevation={0} sx={{ p: { xs: 1, sm: 2 } }}>
