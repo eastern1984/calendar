@@ -23,10 +23,10 @@ const DayView: React.FC<IProps> = ({ dayContent }) => {
         <Stack spacing={{ xs: 1, sm: 2 }}>
             <Paper elevation={0} sx={{ p: { xs: 1, sm: 2 } }}>
 
-                <Typography variant="h3" mb={2}> {weekDayName} {date.locale(intl.locale).format("DD MMMM YYYY")} / {oldStyleDate.locale(intl.locale).format("DD MMMM YYYY")}</Typography>
-                <Typography variant="h4" mb={2}> {weekInfo}</Typography>
+                <Typography variant="h3" mb={2}>{weekDayName} {date.locale(intl.locale).format("DD MMMM YYYY")} / {oldStyleDate.locale(intl.locale).format("DD MMMM YYYY")}</Typography>
+                <Typography variant="h4" mb={2}>{weekInfo}</Typography>
                 <Typography variant="h5" mb={2}>{content?.readings}</Typography>
-                <Typography variant="h5" mb={2}> Рождественский пост. Монастырский устав: cухоядение (хлеб, овощи, фрукты)</Typography>
+                <Typography variant="h5" mb={2}>{content?.description}</Typography>
             </Paper >
             <Paper elevation={0} sx={{ p: { xs: 1, sm: 2 } }}>
                 <List sx={{ width: '100%', bgcolor: 'background.paper', mb: "16px" }}>
