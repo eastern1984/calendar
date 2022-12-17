@@ -1,6 +1,6 @@
 import { Typography, Stack, Button } from '@mui/material'
 import { useState } from 'react'
-import { IDayEvent } from '../../../models/DayEvent';
+import { IDayEvent } from '../../../interfaces/types';
 import Dialog from './Dialog';
 import DayEventsTable from './DayEventsTable';
 

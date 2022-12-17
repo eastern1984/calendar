@@ -2,9 +2,9 @@ import { Box, Paper, Typography, List, Stack, ListItemAvatar, Avatar, ListItemTe
 import { useIntl } from 'react-intl';
 import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
 import { IDayContent } from '../../../models/DayContent';
-import { SERVICE_TYPE, SAINT_TYPE, CATEGORY } from '../../../models/DayEvent';
 import moment from 'moment';
 import Image from 'next/image';
+import { SAINT_TYPE, SERVICE_TYPE } from '../../../interfaces/types';
 
 interface IProps {
     dayContent: IDayContent | null;

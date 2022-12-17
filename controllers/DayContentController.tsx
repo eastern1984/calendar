@@ -1,8 +1,7 @@
-import DayContent from '../models/DayContent';
-import type { NextApiRequest, NextApiResponse } from 'next'
+/*import type { NextApiRequest } from 'next'
 import moment from 'moment';
-import DayEvent, { getLangContentFromEvent, IDayEvent } from '../models/DayEvent';
-import { getDaysFromEaster, getDaysToNextEaster, getReadings, getWeekInfo, getWeeksFromEaster, getWeeksToNextEaster } from '../helpers/tipikonCalculations';
+import { getReadings, getWeekInfo } from '../helpers/tipikonCalculations';
+import DayEvent, { getLangContentFromEvent  } from '../db/models/DayEvent';
 
 export const DATE_CONTENT_FORMAT = 'MM-DD-YYYY';
 export const DATE_EVENT_FORMAT = 'MM-DD';
@@ -10,9 +9,13 @@ export const DATE_EVENT_FORMAT = 'MM-DD';
 export const getDayData = async (req: NextApiRequest) => {
     const { query } = req;
     const date = (query && query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MM-DD-YYYY') : moment()
-    const data = await DayContent.findOne({ date: date.format(DATE_CONTENT_FORMAT) });
 
-    const events = await DayEvent.find({ date: date.format(DATE_EVENT_FORMAT) });
+    //const data = await DayContent.findOne({ date: date.format(DATE_CONTENT_FORMAT) });
+
+
+    const events = await DayEvent.findAll({
+        where: { date: date.format(DATE_EVENT_FORMAT) }
+    });
     const eventsAsContent = {
         date: date.format(DATE_CONTENT_FORMAT),
         content: (process.env.CSV_SUPPORT_LANGUAGES || "").split(",").map(v => {
@@ -20,14 +23,15 @@ export const getDayData = async (req: NextApiRequest) => {
                 readings: getReadings(date).apostol + " " + getReadings(date).gospel,
                 weekInfo: getWeekInfo(date),
                 lang: v,
-                events: events.map(event => ({ ...getLangContentFromEvent(v, event as IDayEvent) })),
+                //  events: events.map(event => ({ ...getLangContentFromEvent(v, event) })),
             }
         })
     }
 
-    return data ? { ...data._doc, _id: undefined } : { ...eventsAsContent };
-};
+    //   return { ...eventsAsContent };
 
+};*/
+/*
 export const createDayContentData = async (req: NextApiRequest) => {
     const { body } = req;
     const dayContent = new DayContent();
@@ -52,7 +56,7 @@ export const updateDayContentData = async (req: NextApiRequest) => {
 };
 
 export const deleteDayContentData = async (req: NextApiRequest) => {
-    const data = await DayContent.find();
+    const data = await daycontent.find();
     return data;
 };
 
@@ -64,4 +68,4 @@ export const getDayContentData = async (req: NextApiRequest) => {
 export const getDayContentsData = async (req: NextApiRequest) => {
     const data = await DayContent.find();
     return data;
-};
+};*/

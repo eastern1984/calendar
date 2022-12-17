@@ -1,8 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 //import { getSession } from "../helpers/sessionToken";
-import { IAxiosBaseContext } from "../interfaces/types";
+import { IAxiosBaseContext, IDayEvent } from "../interfaces/types";
 import { IDayContent } from "../models/DayContent";
-import { IDayEvent } from "../models/DayEvent";
 
 export const getMonthMIReport = (month: string, year: string) => {
     const digitMonth = new Date(Date.parse(month + " 1, 2022")).getMonth() + 1;

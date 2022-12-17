@@ -1,6 +1,7 @@
 import { Box, Typography, Stack, Dialog, DialogTitle, DialogContent, FormHelperText, Button, DialogActions, TextField, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
 import { FormikHelpers, useFormik } from "formik";
-import { CATEGORY, IDayEvent, SAINT_TYPE, SERVICE_TYPE } from '../../../models/DayEvent';
+import { CATEGORY, IDayEvent, SAINT_TYPE, SERVICE_TYPE } from '../../../interfaces/types';
+
 import { useCreateDayEventMutation, useUpdateDayEventMutation } from '../../../requests/hooks/dayEventsHooks';
 import { dayEventSchema } from './schemes';
 

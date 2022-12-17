@@ -1,6 +1,6 @@
 import { Stack, Button, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Backdrop } from '@mui/material'
 import { useState } from 'react'
-import { IDayEvent, CATEGORY, SERVICE_TYPE, SAINT_TYPE } from '../../../models/DayEvent';
+import { IDayEvent, CATEGORY, SERVICE_TYPE, SAINT_TYPE } from '../../../interfaces/types';
 import { useGetDayEventsQuery } from '../../../requests/hooks/dayEventsHooks';
 
 interface IProps {
@@ -12,7 +12,7 @@ const DayEventsTable: React.FC<IProps> = ({ }) => {
     const [page, setPage] = useState(0);
     const [limit, setLimit] = useState(0);
     const { data, isLoading } = useGetDayEventsQuery(filter, page, limit);
-    console.log(4444);
+
     return (
         <>
             <TableContainer component={Paper} elevation={0}>
@@ -31,7 +31,7 @@ const DayEventsTable: React.FC<IProps> = ({ }) => {
                     </TableHead>
                     <TableBody>
                         {(data || []).map((v: IDayEvent) => (
-                            <TableRow key={v._id}>
+                            <TableRow key={v.id}>
                                 <TableCell>{v.date}</TableCell>
                                 <TableCell>{(v.category !== undefined) ? CATEGORY[v.category] : "-"}</TableCell>
                                 <TableCell>{(v.serviceType !== undefined) ? SERVICE_TYPE[v.serviceType].name : "-"}</TableCell>

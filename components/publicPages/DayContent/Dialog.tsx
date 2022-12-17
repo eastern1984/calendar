@@ -1,7 +1,7 @@
 import { IconButton, Divider, Box, Typography, Stack, Dialog, DialogTitle, DialogContent, Button, DialogActions, TextField, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
 import { useState, useEffect } from 'react';
 import moment, { Moment, months } from 'moment';
-import { CATEGORY, SAINT_TYPE, SERVICE_TYPE } from '../../../models/DayEvent';
+import { SAINT_TYPE, SERVICE_TYPE, CATEGORY } from '../../../interfaces/types';
 import { IContent, IDayContent } from '../../../models/DayContent';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
