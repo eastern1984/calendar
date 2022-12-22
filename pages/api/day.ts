@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import moment from 'moment';
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getDayData } from '../../controllers/DayContentController';
 //import { exportFromCsv } from '../../controllers/DayEventController';
 import DayEvent, { getLangContentFromEvent } from '../../db/models/DayEvent';
 import { getReadings, getWeekInfo } from '../../helpers/tipikonCalculations';

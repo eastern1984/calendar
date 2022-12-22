@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
+import { IDayContent } from "../db/models/DayContent";
 //import { getSession } from "../helpers/sessionToken";
 import { IAxiosBaseContext, IDayEvent } from "../interfaces/types";
-import { IDayContent } from "../models/DayContent";
 
 export const getMonthMIReport = (month: string, year: string) => {
     const digitMonth = new Date(Date.parse(month + " 1, 2022")).getMonth() + 1;
@@ -61,7 +61,7 @@ export const axiosRequests = (instance: AxiosInstance) => {
             return data.data;
         },
         putDayEvent: async params => {
-            const { data } = await instance.put<any>(`/day-event/${params.body._id}`, params.body);
+            const { data } = await instance.put<any>(`/day-event/${params.body.id}`, params.body);
             return data;
         },
         postDayEvent: async params => {

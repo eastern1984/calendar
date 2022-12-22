@@ -1,7 +1,6 @@
 import { Box, Typography, Dialog, DialogTitle, DialogContent, Button, DialogActions } from '@mui/material'
 import moment from 'moment';
-import { IDayContent } from '../../../models/DayContent';
-
+import { IDayContent } from '../../../db/models/DayContent';
 
 const EMPTY_EVENT = {
     category: 0,

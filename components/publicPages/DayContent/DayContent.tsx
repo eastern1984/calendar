@@ -2,9 +2,9 @@ import { Typography, Stack, Button } from '@mui/material'
 import { useState } from 'react'
 import Dialog from './Dialog';
 import DayContentTable from './DayContentTable';
-import { IDayContent } from '../../../models/DayContent';
 import ViewDialog from './ViewDialog';
 import DeleteDialog from './DeleteDialog';
+import { IDayContent } from '../../../db/models/DayContent';
 
 export default function DayContent() {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);

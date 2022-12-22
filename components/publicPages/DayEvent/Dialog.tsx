@@ -18,7 +18,8 @@ const INITIAL_DATA = {
     category: null,
     serviceType: null,
     saintType: null,
-    titles: [{ text: "", lang: "ru" }, { text: "", lang: "en" }],
+    title_ru: "",
+    title_en: "",
     year: ""
 };
 
@@ -53,7 +54,8 @@ const DayEventDialog: React.FC<IProps> = ({ open, onClose, dayEvent }) => {
             category: dayEvent.category,
             serviceType: dayEvent.serviceType,
             saintType: dayEvent.saintType,
-            titles: dayEvent.titles,
+            title_ru: dayEvent.title_ru,
+            title_en: dayEvent.title_en,
             year: dayEvent.year
         } : INITIAL_DATA,
         validationSchema: dayEventSchema,
@@ -115,7 +117,7 @@ const DayEventDialog: React.FC<IProps> = ({ open, onClose, dayEvent }) => {
                             label="Описание на русском"
                             onChange={handleChange}
                             name="titles[0].text"
-                            value={values.titles[0]?.text || ""}
+                            value={""}
                             multiline minRows="3"
                             onBlur={handleBlur}
                         />
@@ -123,7 +125,7 @@ const DayEventDialog: React.FC<IProps> = ({ open, onClose, dayEvent }) => {
                             label="Описание на английском"
                             onChange={handleChange}
                             name="titles[1].text"
-                            value={values.titles[1]?.text || ""}
+                            value={""}
                             multiline minRows="3"
                             onBlur={handleBlur}
                         />

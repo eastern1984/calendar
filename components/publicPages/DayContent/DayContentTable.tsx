@@ -1,8 +1,7 @@
 import { Stack, Button, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Backdrop } from '@mui/material'
 import { useState } from 'react'
 import { useGetDayContentsQuery } from '../../../requests/hooks/dayContentHooks';
-import moment, { Moment } from 'moment';
-import { IDayContent } from '../../../models/DayContent';
+import { IDayContent } from '../../../db/models/DayContent';
 
 interface IProps {
     onUpdate: (v: IDayContent) => void
@@ -30,7 +29,7 @@ const DayContentTable: React.FC<IProps> = ({ onUpdate, onView, onDelete }) => {
                     </TableHead>
                     <TableBody>
                         {(data || []).map((v: IDayContent) => (
-                            <TableRow key={v._id}>
+                            <TableRow key={v.id}>
                                 <TableCell>{v.date}</TableCell>
                                 <TableCell> - </TableCell>
                                 <TableCell> - </TableCell>

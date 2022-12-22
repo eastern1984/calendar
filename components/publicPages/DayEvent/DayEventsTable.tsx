@@ -33,11 +33,11 @@ const DayEventsTable: React.FC<IProps> = ({ }) => {
                         {(data || []).map((v: IDayEvent) => (
                             <TableRow key={v.id}>
                                 <TableCell>{v.date}</TableCell>
-                                <TableCell>{(v.category !== undefined) ? CATEGORY[v.category] : "-"}</TableCell>
-                                <TableCell>{(v.serviceType !== undefined) ? SERVICE_TYPE[v.serviceType].name : "-"}</TableCell>
-                                <TableCell>{(v.saintType !== undefined) ? SAINT_TYPE[v.saintType] : "-"}</TableCell>
-                                <TableCell>{v.titles[0]?.text}</TableCell>
-                                <TableCell>{v.titles[1]?.text}</TableCell>
+                                <TableCell>{(v.category !== null) ? CATEGORY[v.category] : "-"}</TableCell>
+                                <TableCell>{(v.serviceType !== null) ? SERVICE_TYPE[v.serviceType].name : "-"}</TableCell>
+                                <TableCell>{(v.saintType !== null) ? SAINT_TYPE[v.saintType] : "-"}</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
                                 <TableCell>{v.year}</TableCell>
                                 <TableCell>
                                     <Stack direction="row" spacing={1}>

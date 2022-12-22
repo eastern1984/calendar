@@ -27,6 +27,7 @@ export interface IAxiosBaseContext {
 }
 
 export interface IDayEvent {
+    id?: number,
     date: string,
     category: number | null,
     serviceType: number | null,

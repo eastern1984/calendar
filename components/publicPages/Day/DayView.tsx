@@ -1,10 +1,10 @@
 import { Box, Paper, Typography, List, Stack, ListItemAvatar, Avatar, ListItemText, Divider, ListItem } from '@mui/material'
 import { useIntl } from 'react-intl';
 import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
-import { IDayContent } from '../../../models/DayContent';
 import moment from 'moment';
 import Image from 'next/image';
 import { SAINT_TYPE, SERVICE_TYPE } from '../../../interfaces/types';
+import { IDayContent } from '../../../db/models/DayContent';
 
 interface IProps {
     dayContent: IDayContent | null;

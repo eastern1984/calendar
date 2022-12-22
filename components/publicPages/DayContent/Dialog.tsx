@@ -2,7 +2,6 @@ import { IconButton, Divider, Box, Typography, Stack, Dialog, DialogTitle, Dialo
 import { useState, useEffect } from 'react';
 import moment, { Moment, months } from 'moment';
 import { SAINT_TYPE, SERVICE_TYPE, CATEGORY } from '../../../interfaces/types';
-import { IContent, IDayContent } from '../../../models/DayContent';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -12,6 +11,7 @@ import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
 import BackDrop from '../../common/BackDrop';
 import { useGetDayQuery } from '../../../requests/hooks/calendarHooks';
 import Month from '../Month/Month';
+import { IContent, IDayContent } from '../../../db/models/DayContent';
 
 const EMPTY_EVENT = {
     category: 0,
@@ -204,7 +204,7 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => { setData(INIT_DATA); onClose(); }} color="secondary" variant='contained'>Отмена</Button>
-                    <Button variant='contained' onClick={() => { data._id ? update({ body: { ...data } }) : create({ body: { ...data } }) }}>Создать</Button>
+                    <Button variant='contained' onClick={() => { data.id ? update({ body: { ...data } }) : create({ body: { ...data } }) }}>Создать</Button>
                 </DialogActions>
             </Box>
         </Dialog >

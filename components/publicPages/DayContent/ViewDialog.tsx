@@ -1,7 +1,5 @@
-import { IconButton, Divider, Box, Typography, Stack, Dialog, DialogTitle, DialogContent, Button, DialogActions, TextField, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
-import moment, { Moment } from 'moment';
-import { IDayContent } from '../../../models/DayContent';
-import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
+import { Box, Typography, Stack, Dialog, DialogTitle, DialogContent, Button, DialogActions, TextField, FormControl, Select, InputLabel, MenuItem } from '@mui/material'
+import { IDayContent } from '../../../db/models/DayContent';
 
 interface IProps {
     open: boolean,

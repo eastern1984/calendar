@@ -1,11 +1,11 @@
-/*import type { NextApiRequest } from 'next'
+import type { NextApiRequest } from 'next'
 import moment from 'moment';
 import { getReadings, getWeekInfo } from '../helpers/tipikonCalculations';
-import DayEvent, { getLangContentFromEvent  } from '../db/models/DayEvent';
+import DayEvent, { getLangContentFromEvent } from '../db/models/DayEvent';
 
 export const DATE_CONTENT_FORMAT = 'MM-DD-YYYY';
 export const DATE_EVENT_FORMAT = 'MM-DD';
-
+/*
 export const getDayData = async (req: NextApiRequest) => {
     const { query } = req;
     const date = (query && query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MM-DD-YYYY') : moment()
