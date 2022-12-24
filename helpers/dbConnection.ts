@@ -33,8 +33,16 @@ async function dbConnect() {
     }
     console.log(111111, MONGODB_URI, cached.promise);
     if (!cached.promise) {
+        const opts = {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            bufferCommands: false,
+            bufferMaxEntries: 0,
+            useFindAndModify: true,
+            useCreateIndex: true
+        }
         console.log(2222222, MONGODB_URI);
-        cached.promise = mongoose.connect(MONGODB_URI || "").then(mongoose => {
+        cached.promise = mongoose.connect(MONGODB_URI || "", opts).then(mongoose => {
             console.log(3333333, MONGODB_URI);
             return mongoose
         })
