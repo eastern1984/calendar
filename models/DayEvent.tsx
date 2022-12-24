@@ -1,5 +1,20 @@
 import mongoose from "mongoose";
 
+export const getServiceType = (text: string) => {
+    const index = SERVICE_TYPE.findIndex(v => v.name === text);
+    return (index === -1) ? null : index;
+}
+
+export const getCategory = (text: string) => {
+    const index = CATEGORY.findIndex(v => v === text);
+    return (index === -1) ? null : index;
+}
+
+export const getSaintType = (text: string) => {
+    const index = SAINT_TYPE.findIndex(v => v === text);
+    return (index === -1) ? null : index;
+}
+
 export const CATEGORY = [
     "Святой", "Литургия", "Двунадесятый праздник"
 ]

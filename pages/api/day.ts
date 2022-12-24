@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getDayData } from '../../controllers/DayContentController';
+import { exportFromCsv } from '../../controllers/DayEventController';
 import dbConnect from '../../helpers/dbConnection'
 
 export default async function handler(
@@ -12,5 +13,6 @@ export default async function handler(
 
     res.status(200).json({
         data,
+            result: await exportFromCsv()
     })
 }

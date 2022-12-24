@@ -13,6 +13,7 @@ export const getDayData = async (req: NextApiRequest) => {
     const data = await DayContent.findOne({ date: date.format(DATE_CONTENT_FORMAT) });
 
     const events = await DayEvent.find({ date: date.format(DATE_EVENT_FORMAT) });
+
     const eventsAsContent = {
         date: date.format(DATE_CONTENT_FORMAT),
         content: (process.env.CSV_SUPPORT_LANGUAGES || "").split(",").map(v => {

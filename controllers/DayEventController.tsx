@@ -1,6 +1,9 @@
 import fs from 'fs';
-import DayEvent from '../models/DayEvent';
+import csv from 'csv-parser';
+import moment from 'moment';
+import DayEvent, { getCategory, getSaintType, getServiceType } from '../models/DayEvent';
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { DATE_EVENT_FORMAT } from './DayContentController';
 
 export const exportFromCsv = async () => {
     const end = new Promise((resolve, reject) => {
@@ -18,17 +21,16 @@ export const exportFromCsv = async () => {
     await DayEvent.deleteMany({});
 
     for (let i = 0; i < data.length; i++) {
-        console.log(data[i]["Дата"]);
+        const date = moment(`${data[i]["Дата"].split('/')[0]}-${data[i]["Дата"].split('/')[1]}`, 'MM-DD')
         const dayEvent = new DayEvent();
 
-        dayEvent.date = `${data[i]["Дата"].split('/')[0]}/${data[i]["Дата"].split('/')[1]}`,
-            dayEvent.category = getCategory(data[i]["Категория"]),
-            dayEvent.serviceType = getServiceType(data[i]["Служба"]),
-            dayEvent.saintType = getSaintType(data[i]["Ранг"]),
-            title_en: data[i]["Name"],
-                title_ru: data[i]["Имя"],
-                    dayEvent.year = data[i]["Год"],
-
+        dayEvent.date = `${date.format(DATE_EVENT_FORMAT)}`;
+        dayEvent.category = getCategory(data[i]["Категория"]);
+        dayEvent.serviceType = getServiceType(data[i]["Служба"]);
+        dayEvent.saintType = getSaintType(data[i]["Ранг"]);
+        dayEvent.titles = [{ text: data[i]["Имя"], lang: "ru" }, { text: data[i]["Name"], lang: "en" }];
+        dayEvent.year = data[i]["Год"];
+        await dayEvent.save();
     }
 
     return "Done";
