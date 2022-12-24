@@ -31,9 +31,11 @@ async function dbConnect() {
     if (cached.conn) {
         return cached.conn
     }
-
+    console.log(111111, MONGODB_URI, cached.promise);
     if (!cached.promise) {
+        console.log(2222222, MONGODB_URI);
         cached.promise = mongoose.connect(MONGODB_URI || "").then(mongoose => {
+            console.log(3333333, MONGODB_URI);
             return mongoose
         })
     }
