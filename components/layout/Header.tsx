@@ -29,7 +29,7 @@ const Header: React.FC<IProps> = ({ onOpenMenu }) => {
                     <IconButton color="inherit" aria-label="open drawer" onClick={() => { onOpenMenu() }} edge="start" sx={{ mr: 2, display: { xs: "initial", md: "none" } }}                    >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h3" component="h1" noWrap>
+                    <Typography variant="h3" component="h1">
                         {intl.formatMessage({ id: "head.title" })}
                     </Typography>
                 </Stack>

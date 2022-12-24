@@ -28,8 +28,8 @@ const Layout: React.FC<{ children: ReactElement }> = ({ children }) => {
                     <Header onOpenMenu={() => setOpen(true)} />
                 </Box>
             </AppBar>
-            <Drawer sx={mobileDrawer} anchor="left" open={open} onClose={() => { setOpen(false) }}            >
-                <Sidebar intl={intl} onClick={() => setOpen(false)} />
+            <Drawer sx={mobileDrawer} anchor="left" open={open} onClose={() => { setOpen(false) }}>
+                <Sidebar intl={intl} onClick={() => setOpen(false)} onClose={() => { setOpen(false) }} />
             </Drawer>
             <Drawer variant="permanent" sx={deskTopDrawer} open>
                 <Sidebar intl={intl} onClick={() => setOpen(false)} />

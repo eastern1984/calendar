@@ -16,21 +16,23 @@ import { Routes } from '../../interfaces/types';
 interface IProps {
     intl: IntlShape;
     onClick: () => void;
+    onClose?: () => void;
 }
 
 const getMenu = (intl: IntlShape) => [
-    { title: intl.formatMessage({ id: "menu.calendar" }), icon: <CalendarMonthIcon />, link: Routes.CALENDAR },
-    { title: intl.formatMessage({ id: "menu.dayEvent" }), icon: <TableViewIcon />, link: Routes.TABLE },
-    { title: intl.formatMessage({ id: "menu.dayTable" }), icon: <TableViewIcon />, link: Routes.TABLE_CONTENT },
+    //  { title: intl.formatMessage({ id: "menu.calendar" }), icon: <CalendarMonthIcon />, link: Routes.CALENDAR },
+    //  { title: intl.formatMessage({ id: "menu.dayEvent" }), icon: <TableViewIcon />, link: Routes.TABLE },
+    //  { title: intl.formatMessage({ id: "menu.dayTable" }), icon: <TableViewIcon />, link: Routes.TABLE_CONTENT },
     { title: intl.formatMessage({ id: "menu.contacts" }), icon: <ContactSupportIcon />, link: Routes.CONTACTS }
 ];
 
-const Sidebar: React.FC<IProps> = ({ intl, onClick }) => {
+const Sidebar: React.FC<IProps> = ({ intl, onClick, onClose }) => {
     const { push, query } = useRouter();
     const [date, setDate] = useState<Moment | null>((query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MM-DD-YYYY') : moment());
     const handleChange = (newValue: Moment | null) => {
         setDate(newValue);
         push(newValue ? `/${newValue.format('YYYY')}/${newValue.format('MM')}/${newValue.format('DD')}` : "/");
+        onClose && onClose();
     };
 
     useEffect(() => {
@@ -44,6 +46,13 @@ const Sidebar: React.FC<IProps> = ({ intl, onClick }) => {
             <Box m={"12px auto "}>
                 <Image src={intl.formatMessage({ id: "logo" })} width="210" height="35" alt="Logo" />
             </Box>
+            <Divider />
+            <StaticDatePicker
+                displayStaticWrapperAs="desktop"
+                value={date}
+                onChange={handleChange}
+                renderInput={(params) => <TextField {...params} />}
+            />
             <Divider />
             <List>
                 {getMenu(intl).map(v => (
@@ -59,14 +68,6 @@ const Sidebar: React.FC<IProps> = ({ intl, onClick }) => {
                     </Link>
                 ))}
             </List>
-            <Divider />
-            <StaticDatePicker
-            
-                displayStaticWrapperAs="desktop"
-                value={date}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-            />
         </Stack>
     );
 }
