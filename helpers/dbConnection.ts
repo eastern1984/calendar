@@ -33,19 +33,17 @@ async function dbConnect() {
     }
     console.log(111111, MONGODB_URI, cached.promise);
     if (!cached.promise) {
-        const opts = {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            bufferCommands: false,
 
-        }
         console.log(2222222, MONGODB_URI);
         cached.promise = mongoose.connect(MONGODB_URI || "", opts).then(mongoose => {
             console.log(3333333, MONGODB_URI);
             return mongoose
+        }).catch(err: any => {
+            console.log(7777, err);
         })
     }
     cached.conn = await cached.promise
+    console.log(4444, cached.conn);
     return cached.conn
 }
 
