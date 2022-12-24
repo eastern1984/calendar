@@ -35,7 +35,7 @@ async function dbConnect() {
     if (!cached.promise) {
 
         console.log(2222222, MONGODB_URI);
-        cached.promise = mongoose.connect(MONGODB_URI || "", opts).then(mongoose => {
+        cached.promise = mongoose.connect(MONGODB_URI || "").then(mongoose => {
             console.log(3333333, MONGODB_URI);
             return mongoose
         }).catch((err: any) => {
