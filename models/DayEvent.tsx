@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
 
 export const getServiceType = (text: string) => {
-    const index = SERVICE_TYPE.findIndex(v => v.name === text);
+    const index = SERVICE_TYPE.findIndex(v => v.name === text.trim());
     return (index === -1) ? null : index;
 }
 
 export const getCategory = (text: string) => {
-    const index = CATEGORY.findIndex(v => v === text);
+    const index = CATEGORY.findIndex(v => v === text.trim());
     return (index === -1) ? null : index;
 }
 
 export const getSaintType = (text: string) => {
-    const index = SAINT_TYPE.findIndex(v => v === text);
+    const index = SAINT_TYPE.findIndex(v => v === text.trim());
     return (index === -1) ? null : index;
 }
 
@@ -28,7 +28,7 @@ export const SERVICE_TYPE = [
 ]
 
 export const SAINT_TYPE = [
-    'Свт.', 'Мч.', 'Св.', 'Прпмч.', 'Свщмч.', 'Прав.', 'Прп.', 'Прор.'
+    'Ап.', 'Апп.', 'Свт.', 'Свтт.', 'Мч.', 'Мчч.', 'Прп.', 'Прпп.', 'Свщмч.', 'Свщмчч.', 'Прав.', 'Прмч.', 'Прмчч.', 'Прор.', 'Св.', 'Свв.', 'Блж.', 'Равноап.', 'Равноапп.', 'Собор святых', 'Перенесение мощей', 'Бессребреников'
 ]
 
 export interface IDayEvent {

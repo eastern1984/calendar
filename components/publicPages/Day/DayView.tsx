@@ -1,4 +1,4 @@
-import { Box, Paper, Typography, List, Stack, ListItemAvatar, Avatar, ListItemText, Divider, ListItem } from '@mui/material'
+import { Box, Paper, Typography, List, Stack } from '@mui/material'
 import { useIntl } from 'react-intl';
 import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
 import { IDayContent } from '../../../models/DayContent';
@@ -42,7 +42,7 @@ const DayView: React.FC<IProps> = ({ dayContent }) => {
                                         variant={(v.category === 2) ? "h4" : "h5"}
                                         color={(v.category === 2) ? "error" : "text.primary"}
                                     >
-                                        {(v.category === 0) && SAINT_TYPE[v.saintType]} {v.title} {v.year && (v.year !== "0") && `(${v.year})`}
+                                        {(v.category === 0) && (v.saintType !== null) && intl.formatMessage({ id: SAINT_TYPE[v.saintType] })} {v.title} {v.year && (v.year !== "0") && `(${v.year})`}
                                     </Typography>
                                 }
                                 {(v.category === 1) &&
