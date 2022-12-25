@@ -42,7 +42,7 @@ const DayView: React.FC<IProps> = ({ dayContent }) => {
                                         variant={(v.category === 2) ? "h4" : "h5"}
                                         color={(v.category === 2) ? "error" : "text.primary"}
                                     >
-                                        {(v.category === 0) && (v.saintType !== null) && intl.formatMessage({ id: SAINT_TYPE[v.saintType] })} {v.title} {v.year && (v.year !== "0") && `(${v.year})`}
+                                        {((v.category === 0) || (v.category === null)) && (v.saintType !== null) && intl.formatMessage({ id: SAINT_TYPE[v.saintType] })} {v.title} {v.year && (v.year !== "0") && `(${v.year})`}
                                     </Typography>
                                 }
                                 {(v.category === 1) &&
