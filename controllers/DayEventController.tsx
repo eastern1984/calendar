@@ -26,8 +26,8 @@ export const exportFromCsv = async () => {
 
         // console.log(data[i]["Ранг"], getSaintType(data[i]["Ранг"]), `${date.format(DATE_EVENT_FORMAT)}`);
 
-        console.log(getCategory(data[i]["Категория"]), data[i]["Категория"]);
-        dayEvent.date = `${date.format(DATE_EVENT_FORMAT)}`;
+        console.log(data.length);
+        dayEvent.date = `${date.add(13, "days").format(DATE_EVENT_FORMAT)}`;
         dayEvent.category = getCategory(data[i]["Категория"]);
         dayEvent.serviceType = getServiceType(data[i]["Служба"]);
         dayEvent.saintType = getSaintType(data[i]["Ранг"]);
