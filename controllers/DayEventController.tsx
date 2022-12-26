@@ -23,6 +23,9 @@ export const exportFromCsv = async () => {
     for (let i = 0; i < data.length; i++) {
         const date = moment(`${data[i]["Дата"].split('/')[0]}-${data[i]["Дата"].split('/')[1]}`, 'MM-DD')
         const dayEvent = new DayEvent();
+
+        // console.log(data[i]["Ранг"], getSaintType(data[i]["Ранг"]), `${date.format(DATE_EVENT_FORMAT)}`);
+
         console.log(getCategory(data[i]["Категория"]), data[i]["Категория"]);
         dayEvent.date = `${date.format(DATE_EVENT_FORMAT)}`;
         dayEvent.category = getCategory(data[i]["Категория"]);

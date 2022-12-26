@@ -5,6 +5,10 @@ export const getServiceType = (text: string) => {
     return (index === -1) ? null : index;
 }
 
+export const CATEGORY = [
+    "Святой", "Собор святых", "Особенность", "Праздник", "Переходящий", "Икона"
+]
+
 export const getCategory = (text: string) => {
     const index = CATEGORY.findIndex(v => v === text.trim());
     return (index === -1) ? null : index;
@@ -15,9 +19,15 @@ export const getSaintType = (text: string) => {
     return (index === -1) ? null : index;
 }
 
-export const CATEGORY = [
-    "Святой", "Литургия", "Двунадесятый праздник"
-]
+export enum CATEGORY_TYPES {
+    SAINT = (getCategory("Святой") === null) ? -1 : 0,
+    SAINTS = getCategory("Собор святых") || -1,
+    SPECIALTY = getCategory("Особенность") || -1,
+    GREAT_HOLIDAY = getCategory("Праздник") || -1,
+    NOT_FIXED = getCategory("Переходящий") || -1,
+    ICON = getCategory("Икона") || -1,
+}
+
 
 export const SERVICE_TYPE = [
     { name: 'Нет Знака', img: "" },
@@ -28,7 +38,7 @@ export const SERVICE_TYPE = [
 ]
 
 export const SAINT_TYPE = [
-    'Ап.', 'Апп.', 'Свт.', 'Свтт.', 'Мч.', 'Мчч.', 'Прп.', 'Прпп.', 'Свщмч.', 'Свщмчч.', 'Прав.', 'Прмч.', 'Прмчч.', 'Прор.', 'Св.', 'Свв.', 'Блж.', 'Равноап.', 'Равноапп.', 'Собор святых', 'Перенесение мощей', 'Бессребреников'
+    'Ап.', 'Апп.', 'Свт.', 'Свтт.', 'Мч.', 'Мчч.', 'Прп.', 'Прпп.', 'Сщмч.', 'Сщмчч.', 'Прав.', 'Прмч.', 'Прмчч.', 'Прор.', 'Св.', 'Свв.', 'Блж.', 'Равноап.', 'Равноапп.', 'Собор святых', 'Перенесение мощей', 'Бессребреников'
 ]
 
 export interface IDayEvent {

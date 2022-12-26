@@ -2,6 +2,7 @@
     "head.title": "Orthodox Calendar",
     "footer.info": "© 2022 Patriarchal Exarchate of South-East Asia (Moscow Patriarchate)",
     "logo": "/images/logo-en.png",
+    "old style": "old style",
     "menu.calendar": "Calendar",
     "menu.dayEvent": "Day Events Table",
     "menu.dayTable": "Day Content Table",
