@@ -10,22 +10,23 @@ export const INIT_DAY_CONTENT: IDayContent = {
 
 export interface IDayView {
     date: string,
-    content: {
-        description: string,
-        readings: string,
-        weekInfo?: string,
-        weekInfoData?: {
-            weekNumberFromPentecost: number,
-            glas: number
-        },
-        lang: string,
-        events: {
-            year: string,
-            category: number,
-            serviceType: number,
-            saintType: number,
-            title: string,
-        }[],
+    content: IDayViewContent[]
+}
+export interface IDayViewContent {
+    description: string,
+    readings: string,
+    weekInfo?: string,
+    weekInfoData?: {
+        weekNumberFromPentecost: number,
+        glas: number
+    },
+    lang: string,
+    events: {
+        year: string,
+        category: number,
+        serviceType: number,
+        saintType: number,
+        title: string,
     }[]
 }
 

@@ -1,7 +1,6 @@
 import { Box, Paper, Typography, List, Stack, ListItemButton, Button, ListItemAvatar, Avatar, ListItemText, Divider, IconButton } from '@mui/material'
 
 import { useGetDayQuery } from '../../../requests/hooks/calendarHooks';
-import { IDayContent } from '../../../models/DayContent';
 import DayView from './DayView';
 import BackDrop from '../../common/BackDrop';
 import { useRouter } from 'next/router';

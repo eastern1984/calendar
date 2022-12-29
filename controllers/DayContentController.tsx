@@ -1,30 +1,12 @@
-import DayContent, { IDayContent, IDayView, INIT_DAY_CONTENT } from '../models/DayContent';
-import type { NextApiRequest, NextApiResponse } from 'next'
+import DayContent, { IDayView, INIT_DAY_CONTENT } from '../models/DayContent';
+import type { NextApiRequest } from 'next'
 import moment from 'moment';
 import DayEvent, { getLangContentFromEvent, IDayEvent } from '../models/DayEvent';
-import { getDaysFromEaster, getDaysToNextEaster, getReadings, getWeekInfo, getWeeksFromEaster, getWeeksToNextEaster } from '../helpers/tipikonCalculations';
+import { getReadings, getWeekInfo } from '../helpers/tipikonCalculations';
+import { dayContentsForDayView } from '../helpers/dayView';
 
 export const DATE_CONTENT_FORMAT = 'MM-DD-YYYY';
 export const DATE_EVENT_FORMAT = 'MM-DD';
-
-export const dayContentsForDayView = (data: IDayContent): IDayView => ({
-    date: data.date,
-    content: (process.env.CSV_SUPPORT_LANGUAGES || "").split(",").map(v => {
-        return {
-            description: data.description.find(r => r.lang === v)?.text || "",
-            readings: data.readings.find(r => r.lang === v)?.text || "",
-            weekInfo: data.weekInfo.find(r => r.lang === v)?.text || "",
-            lang: v,
-            events: data.events.map(event => ({
-                year: event.year,
-                category: event.category,
-                serviceType: event.serviceType,
-                saintType: event.saintType,
-                title: event.titles.find(t => t.lang === v)?.text || "",
-            })),
-        }
-    })
-})
 
 export const getDayData = async (req: NextApiRequest) => {
     const { query } = req;

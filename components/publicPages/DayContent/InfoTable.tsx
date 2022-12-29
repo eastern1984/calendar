@@ -7,8 +7,6 @@ interface IProps {
 }
 
 const InfoTable: React.FC<IProps> = ({ data, setData }) => {
-    console.log(44444, data?.weekInfo.find(v => v.lang === 'ru')?.text);
-
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">

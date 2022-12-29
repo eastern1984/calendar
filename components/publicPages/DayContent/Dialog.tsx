@@ -8,6 +8,8 @@ import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
 import BackDrop from '../../common/BackDrop';
 import InfoTable from './InfoTable';
 import EventsTable from './EventsTable';
+import DayView from '../Day/DayView';
+import { dayContentsForDayView } from '../../../helpers/dayView';
 
 interface IProps {
     open: boolean,
@@ -29,9 +31,7 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
     }, [oldData, isFetching]);
 
     useEffect(() => {
-        //  if (dayContent) {
         setData(dayContent ? { ...dayContent } : INIT_DAY_CONTENT)
-        //  }
     }, [dayContent])
 
     useEffect(() => {
@@ -62,6 +62,7 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
                         {data && <InfoTable data={data} setData={setData} />}
                         {data && <EventsTable data={data} setData={setData} />}
                         <Typography variant='h4'>Предпросмотр</Typography>
+                        <DayView dayContent={dayContentsForDayView(data)} />
                     </Stack>
                 </DialogContent>
                 <DialogActions>
