@@ -1,23 +1,47 @@
 import mongoose from "mongoose";
 
+export const INIT_DAY_CONTENT: IDayContent = {
+    description: [{ lang: "ru", text: "" }, { lang: "en", text: "" }],
+    readings: [{ lang: "ru", text: "" }, { lang: "en", text: "" }],
+    weekInfo: [{ lang: "ru", text: "" }, { lang: "en", text: "" }],
+    events: [],
+    date: ""
+};
+
+export interface IDayView {
+    date: string,
+    content: {
+        description: string,
+        readings: string,
+        weekInfo?: string,
+        weekInfoData?: {
+            weekNumberFromPentecost: number,
+            glas: number
+        },
+        lang: string,
+        events: {
+            year: string,
+            category: number,
+            serviceType: number,
+            saintType: number,
+            title: string,
+        }[],
+    }[]
+}
+
 export interface IEvent {
     category: number;
     serviceType: number;
     saintType: number;
-    title: string;
-    year: string;
-}
-
-export interface IContent {
-    weekInfo: string,
-    readings: string,
-    description: string,
-    lang: string,
-    events: IEvent[]
+    titles: { text: string; lang: string }[],
+    year: string,
 }
 
 export interface IDayContent {
-    content: IContent[];
+    weekInfo: { text: string; lang: string }[],
+    readings: { text: string; lang: string }[],
+    description: { text: string; lang: string }[],
+    events: IEvent[],
     date: string;
     _id?: string;
     deleted?: boolean;
@@ -29,21 +53,16 @@ interface IDayContentSchema extends IDayContent {
 }
 
 const schema = new mongoose.Schema({
-    content: [
+    weekInfo: [{ text: String, lang: String }],
+    readings: [{ text: String, lang: String }],
+    description: [{ text: String, lang: String }],
+    events: [
         {
-            weekInfo: String,
-            readings: String,
-            description: String,
-            lang: String,
-            events: [
-                {
-                    category: Number,
-                    serviceType: Number,
-                    saintType: Number,
-                    title: String,
-                    year: String,
-                }
-            ]
+            category: Number,
+            serviceType: Number,
+            saintType: Number,
+            titles: [{ text: String, lang: String }],
+            year: String,
         }
     ],
     date: String

@@ -69,8 +69,8 @@ export const axiosRequests = (instance: AxiosInstance) => {
             const { data } = await instance.post<any>(`/day-event`, params.body);
             return data;
         },
-        getDayContent: async (id: string) => {
-            const { data } = await instance.get<{ data: IDayContent }>(`/day-content/${id}`);
+        getDayContent: async (year: string, month: string, day: string) => {
+            const { data } = await instance.get<{ data: IDayContent | null }>(`/day-content?year=${year}&month=${month}&day=${day}`);
             return data.data;
         },
         getDayContents: async (filter: string, page: number, limit: number) => {

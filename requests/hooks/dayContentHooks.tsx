@@ -3,10 +3,11 @@ import { useGetAxiosRequests } from "../axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { QueryKeys } from "../../interfaces/types";
 
-export const useGetDayContentQuery = (DayContentNumber: string) => {
+export const useGetDayContentQuery = (year: string, month: string, day: string) => {
     const { getDayContent } = useGetAxiosRequests();
     //  const { enqueueSnackbar } = useSnackbar();
-    return useQuery([QueryKeys.DAY_CONTENT, DayContentNumber], () => getDayContent(DayContentNumber), {
+    return useQuery([QueryKeys.DAY_CONTENT, year, month, day], () => getDayContent(year, month, day), {
+        enabled: !!(year && month && day),
         onSuccess: () => { },
         onError: (error: AxiosError) => {
             //      enqueueSnackbar("Get DayContents error", { variant: "error" });

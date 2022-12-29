@@ -23,9 +23,9 @@ export default function DayContent() {
                 onView={(item) => { setCurrentItem(item); setShowViewDialog(true) }}
                 onDelete={(item) => { setCurrentItem(item); setShowDeleteDialog(true) }}
             />
-            <Dialog open={showDialog} onClose={() => { setShowDialog(false) }} dayContent={currentItem} />
-            <ViewDialog open={showViewDialog} onClose={() => { setShowViewDialog(false) }} dayContent={currentItem} />
-            <DeleteDialog open={showDeleteDialog} onClose={() => { setShowDeleteDialog(false) }} dayContent={currentItem} />
+            {showDialog && <Dialog open={showDialog} onClose={() => { setShowDialog(false) }} dayContent={currentItem} />}
+            {showViewDialog && <ViewDialog open={showViewDialog} onClose={() => { setShowViewDialog(false) }} dayContent={currentItem} />}
+            {showDeleteDialog && <DeleteDialog open={showDeleteDialog} onClose={() => { setShowDeleteDialog(false) }} dayContent={currentItem} />}
         </Stack>
     )
 }

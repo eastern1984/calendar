@@ -19,8 +19,8 @@ export default async function dayContentHandler(req: NextApiRequest, res: NextAp
             res.status(200).json({ result: await createDayContentData(req) })
             break
         case 'GET':
-            await getDayContentData(req)
-            res.status(200).json({ id, name: `User ${id}` })
+            const data = await getDayContentData(req)
+            res.status(200).json({ data })
             break
         case 'PUT':
             await updateDayContentData(req)

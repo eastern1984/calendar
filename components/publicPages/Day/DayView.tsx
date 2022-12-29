@@ -1,14 +1,14 @@
 import { Button, Paper, Typography, List, Stack } from '@mui/material'
 import { useIntl } from 'react-intl';
 import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
-import { IDayContent } from '../../../models/DayContent';
+import { IDayContent, IDayView } from '../../../models/DayContent';
 import { SERVICE_TYPE, SAINT_TYPE, CATEGORY, CATEGORY_TYPES } from '../../../models/DayEvent';
 import moment from 'moment';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 interface IProps {
-    dayContent: IDayContent | null;
+    dayContent: IDayView | null;
 }
 
 const DayView: React.FC<IProps> = ({ dayContent }) => {
@@ -19,7 +19,7 @@ const DayView: React.FC<IProps> = ({ dayContent }) => {
     const content = dayContent?.content.find(v => v.lang == intl.locale);
     let weekDayName = date.locale(intl.locale).format("dddd");
     weekDayName = weekDayName.charAt(0).toUpperCase() + weekDayName.slice(1);
-    const weekInfo = `${intl.formatMessage({ id: "week" })} ${(content?.weekInfo as any)?.weekNumberFromPentecost}-${intl.formatMessage({ id: "weekNumberEnd" })} ${intl.formatMessage({ id: "afterPentecost" })}. ${intl.formatMessage({ id: "glas" })} ${(content?.weekInfo as any)?.glas}.`;
+    const weekInfo = (content?.weekInfo !== undefined) ? content?.weekInfo : `${intl.formatMessage({ id: "week" })} ${content?.weekInfoData?.weekNumberFromPentecost}-${intl.formatMessage({ id: "weekNumberEnd" })} ${intl.formatMessage({ id: "afterPentecost" })}. ${intl.formatMessage({ id: "glas" })} ${content?.weekInfoData?.glas}.`;
 
     const greatHoliday = content?.events.find(v => v.category === CATEGORY_TYPES.GREAT_HOLIDAY);
     const specialty = content?.events.find(v => v.category === CATEGORY_TYPES.SPECIALTY);

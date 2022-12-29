@@ -21,7 +21,7 @@ export interface IAxiosBaseContext {
     deleteDayEvent: (id: string) => Promise<any>;
     postDayEvent: (params: { body: IDayEvent }) => Promise<any>;
     putDayEvent: (params: { body: IDayEvent }) => Promise<any>;
-    getDayContent: (id: string) => Promise<any>;
+    getDayContent: (year: string, month: string, day: string) => Promise<any>;
     getDayContents: (filter: string, page: number, limit: number) => Promise<any>;
     deleteDayContent: (id: string) => Promise<any>;
     postDayContent: (params: { body: IDayContent }) => Promise<any>;
