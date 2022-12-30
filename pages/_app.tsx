@@ -30,7 +30,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const messages: any = {
+export const messages: any = {
   ru,
   en,
 };

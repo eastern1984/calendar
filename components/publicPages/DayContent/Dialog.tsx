@@ -1,4 +1,4 @@
-import { Box, Typography, Stack, Dialog, DialogTitle, DialogContent, Button, DialogActions, TextField } from '@mui/material'
+import { Paper, Box, Typography, Stack, Dialog, DialogTitle, DialogContent, Button, DialogActions, TextField } from '@mui/material'
 import { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 import { IDayContent, INIT_DAY_CONTENT } from '../../../models/DayContent';
@@ -10,6 +10,8 @@ import InfoTable from './InfoTable';
 import EventsTable from './EventsTable';
 import DayView from '../Day/DayView';
 import { dayContentsForDayView } from '../../../helpers/dayView';
+import { IntlProvider } from 'react-intl';
+import { messages } from '../../../pages/_app';
 
 interface IProps {
     open: boolean,
@@ -62,12 +64,23 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
                         {data && <InfoTable data={data} setData={setData} />}
                         {data && <EventsTable data={data} setData={setData} />}
                         <Typography variant='h4'>Предпросмотр</Typography>
-                        <DayView dayContent={dayContentsForDayView(data)} />
+                        <Stack direction="row" spacing={2}>
+                            <IntlProvider locale={"ru"} messages={messages["ru"]}>
+                                <Paper elevation={1}>
+                                    <DayView dayContent={dayContentsForDayView(data)} />
+                                </Paper>
+                            </IntlProvider>
+                            <IntlProvider locale={"en"} messages={messages["en"]}>
+                                <Paper>
+                                    <DayView dayContent={dayContentsForDayView(data)} />
+                                </Paper>
+                            </IntlProvider>
+                        </Stack>
                     </Stack>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => { setData(INIT_DAY_CONTENT); onClose(); }} color="secondary" variant='contained'>Отмена</Button>
-                    <Button variant='contained' onClick={() => { data._id ? update({ body: { ...data } }) : create({ body: { ...data } }) }}>Создать</Button>
+                    <Button variant='contained' onClick={() => { data._id ? update({ body: { ...data } }) : create({ body: { ...data } }) }}>Сохранить</Button>
                 </DialogActions>
             </Box>
         </Dialog >

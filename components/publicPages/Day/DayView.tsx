@@ -1,5 +1,5 @@
 import { Button, Paper, Typography, List, Stack } from '@mui/material'
-import { IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { DATE_CONTENT_FORMAT } from '../../../controllers/DayContentController';
 import { IDayContent, IDayView, IDayViewContent } from '../../../models/DayContent';
 import { SERVICE_TYPE, SAINT_TYPE, CATEGORY, CATEGORY_TYPES } from '../../../models/DayEvent';
@@ -24,7 +24,7 @@ export const WeekDayName: React.FC<{ intl: IntlShape, day?: string }> = ({ intl,
     return (
         <Typography variant="h3" mb={2}>
             {weekDayName} {date.locale(intl.locale).format("DD MMMM YYYY")}
-            <Typography variant="body1" component="span"> ({oldStyleDate.locale(intl.locale).format("DD MMMM YYYY")} {intl.formatMessage({ id: "old style" })})</Typography>
+            <Typography variant="body1" component="span"> ({oldStyleDate.locale(intl.locale).format("DD MMMM YYYY")} <FormattedMessage id="old style" />)</Typography>
         </Typography>
     );
 };
@@ -72,7 +72,7 @@ export const DayContent: React.FC<{ intl: IntlShape, content?: IDayViewContent }
                                     component="span"
                                     variant="h5"
                                 >
-                                    {v.saintType && intl.formatMessage({ id: SAINT_TYPE[v.saintType] })} {v.title} {v.year && (v.year !== "0") && `(${v.year})`}
+                                    {v.saintType && <FormattedMessage id={SAINT_TYPE[v.saintType]} />} {v.title} {v.year && (v.year !== "0") && `(${v.year})`}
                                 </Typography>
                             </Stack>
                         ))}
@@ -95,7 +95,7 @@ export const DaySpecialty: React.FC<{ intl: IntlShape, content?: IDayViewContent
     return (<>
         {specialty &&
             <Paper elevation={0} sx={{ p: { xs: 1, sm: 2 } }}>
-                <Typography variant="body1" mb={2} fontStyle="italic"> {intl.formatMessage({ id: "liturgy" })} {specialty.title}</Typography>
+                <Typography variant="body1" mb={2} fontStyle="italic"> <FormattedMessage id="liturgy" /> {specialty.title}</Typography>
             </Paper>
         }
     </>
