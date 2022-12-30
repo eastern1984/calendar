@@ -8,7 +8,7 @@ interface IProps {
 
 const InfoTable: React.FC<IProps> = ({ data, setData }) => {
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} elevation={0}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>

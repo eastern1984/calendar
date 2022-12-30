@@ -13,7 +13,7 @@ export const textField: SxProps<Theme> = {
     "& .MuiSelect-select": { padding: "1" },
 };
 
-const EMPTY_EVENT = {
+export const EMPTY_EVENT = {
     category: 0,
     serviceType: 0,
     saintType: 0,
@@ -27,10 +27,6 @@ interface IProps {
 }
 
 const EventsTable: React.FC<IProps> = ({ data, setData }) => {
-
-    const addItemToEvents = () => {
-        setData({ ...data, events: data.events ? [...data.events, { ...EMPTY_EVENT }] : [{ ...EMPTY_EVENT }] });
-    }
     const setType = (i: number, lang: string, value: number | string, type: "category" | "serviceType" | "saintType" | 'year' | "title") => {
         setData({
             ...data,
@@ -68,17 +64,13 @@ const EventsTable: React.FC<IProps> = ({ data, setData }) => {
 
     return (
         <Stack spacing={2} width={"100%"}>
-            <Stack alignItems={"flex-end"} pt={2}>
-                <Button variant='contained' sx={{ width: "200px" }} onClick={() => addItemToEvents()}>Добавить событие</Button>
-            </Stack>
-
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} elevation={0}>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Категория</TableCell>
-                            <TableCell>Служба</TableCell>
                             <TableCell>Ранг</TableCell>
+                            <TableCell>Служба</TableCell>
                             <TableCell>Описание (ru)</TableCell>
                             <TableCell>Описание (en)</TableCell>
                             <TableCell>Год (ru)</TableCell>
