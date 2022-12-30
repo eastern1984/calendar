@@ -12,7 +12,7 @@ const DayEventsTable: React.FC<IProps> = ({ }) => {
     const [page, setPage] = useState(0);
     const [limit, setLimit] = useState(0);
     const { data, isLoading } = useGetDayEventsQuery(filter, page, limit);
-    console.log(4444);
+
     return (
         <>
             <TableContainer component={Paper} elevation={0}>

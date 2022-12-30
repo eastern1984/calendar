@@ -42,7 +42,7 @@ const DayContentDialog: React.FC<IProps> = ({ open, onClose, dayContent }) => {
             onClose();
         }
     }, [isUpdated, isSuccess])
-    console.log(444, data);
+
     return (
         <Dialog open={open} onClose={() => { setData(INIT_DAY_CONTENT); onClose(); }} maxWidth="lg" fullWidth fullScreen>
             <Box component="form">
