@@ -62,8 +62,8 @@ export const DayContent: React.FC<{ intl: IntlShape, content?: IDayViewContent }
                     {greatHoliday && <Typography variant="h4" mb={2} color="red">{greatHoliday.title}</Typography>}
                     {content?.events
                         .filter(v => ((v.category === CATEGORY_TYPES.SAINT) || (v.category === CATEGORY_TYPES.SAINTS) || (v.category === CATEGORY_TYPES.ICON) || (v.category === CATEGORY_TYPES.NOT_FIXED)))
-                        .map(v => (
-                            <Stack key={v.title} direction="row" spacing={1}>
+                        .map((v, i) => (
+                            <Stack key={i} direction="row" spacing={1}>
                                 {false && (!SERVICE_TYPE[v.serviceType].img ? "" : (v.category === 2) ?
                                     <Image src={"/images/1-holiday.gif"} alt="" width={25} height={20} /> :
                                     (v.serviceType !== null) && <Image src={SERVICE_TYPE[v.serviceType].img} alt="" width={20} height={20} />)
@@ -78,7 +78,7 @@ export const DayContent: React.FC<{ intl: IntlShape, content?: IDayViewContent }
                         ))}
                 </Stack>
             </List>
-        </Paper >
+        </Paper>
     );
 };
 export const DayReadings: React.FC<{ readings?: string }> = ({ readings }) => {
