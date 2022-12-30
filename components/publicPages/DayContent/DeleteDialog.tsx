@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { Box, Typography, Dialog, DialogTitle, DialogContent, Button, DialogActions } from '@mui/material'
 import moment from 'moment';
 import { IDayContent } from '../../../models/DayContent';
+import { useDeleteDayContentMutation } from '../../../requests/hooks/dayContentHooks';
 
 
 const EMPTY_EVENT = {
@@ -14,10 +16,22 @@ const EMPTY_EVENT = {
 interface IProps {
     open: boolean,
     onClose: () => void,
-    dayContent: IDayContent | null
+    dayContent: IDayContent
 }
 
 const DeleteDialog: React.FC<IProps> = ({ open, dayContent, onClose }) => {
+    const { mutate, isLoading, isSuccess } = useDeleteDayContentMutation();
+
+    const onDelete = () => {
+        mutate(dayContent._id!);
+    }
+
+    useEffect(() => {
+        if (isSuccess) {
+            onClose();
+        }
+    }, [isSuccess]);
+
     return (
         <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
             <Box>
@@ -27,7 +41,7 @@ const DeleteDialog: React.FC<IProps> = ({ open, dayContent, onClose }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={onClose} color="secondary" variant='contained'>Закрыть</Button>
-                    <Button onClick={onClose} color="error" variant='contained'>Удалить</Button>
+                    <Button onClick={onDelete} color="error" variant='contained'>Удалить</Button>
                 </DialogActions>
             </Box>
         </Dialog >

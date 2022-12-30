@@ -62,8 +62,8 @@ export const updateDayContentData = async (req: NextApiRequest) => {
     return "Not found";
 };
 
-export const deleteDayContentData = async (req: NextApiRequest) => {
-    const data = await DayContent.find();
+export const deleteDayContentData = async (id: string) => {
+    const data = await DayContent.deleteOne({ _id: id });
     return data;
 };
 

@@ -27,11 +27,11 @@ export const useGetDayContentsQuery = (filter: string, page: number, limit: numb
     });
 };
 
-export const useDeleteDayContentMutation = (DayContentNumber: string) => {
+export const useDeleteDayContentMutation = () => {
     // const { enqueueSnackbar } = useSnackbar();
     const { deleteDayContent } = useGetAxiosRequests();
     const queryClient = useQueryClient();
-    return useMutation<any, AxiosError, any>(() => deleteDayContent(DayContentNumber), {
+    return useMutation<any, AxiosError, any>(deleteDayContent, {
         onSuccess: async () => await queryClient.invalidateQueries(QueryKeys.DAY_CONTENT),
         onError: (error: AxiosError) => {
             //          enqueueSnackbar("Delete DayContentS error", { variant: "error" });
