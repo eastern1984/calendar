@@ -72,7 +72,7 @@ export const DayContent: React.FC<{ intl: IntlShape, content?: IDayViewContent }
                                     component="span"
                                     variant="h5"
                                 >
-                                    {v.saintType && <FormattedMessage id={SAINT_TYPE[v.saintType]} />} {v.title} {v.year && (v.year !== "0") && `(${v.year})`}
+                                    {(v.saintType !== null) && <FormattedMessage id={SAINT_TYPE[v.saintType]} />} {v.title} {v.year && (v.year !== "0") && `(${v.year})`}
                                 </Typography>
                             </Stack>
                         ))}
