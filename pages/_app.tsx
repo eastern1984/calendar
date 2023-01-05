@@ -13,8 +13,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AxiosInstanceProvider } from '../requests/axios';
 import { QueryClientProvider, QueryClient } from "react-query";
+import { SessionProvider } from "next-auth/react"
+import type { Session } from "next-auth"
 import 'moment/locale/ru';
 import 'dayjs/locale/ru';
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,31 +38,33 @@ export const messages: any = {
   en,
 };
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>) {
   const { locale } = useRouter();
   const [isSSR, setIsSSR] = useState(true);
 
   useEffect(() => {
     setIsSSR(false);
   }, []);
-
+  console.log(7777, session);
   return (
     <>
       <IntlProvider locale={locale || "en"} messages={messages[locale || "en"]}>
         <QueryClientProvider client={queryClient}>
           <AxiosInstanceProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs} locale={locale || "en"}>
-              <ThemeProvider theme={getTheme()}>
-                {!isSSR &&
-                  <Layout>
-                    <Component {...pageProps} />
-                  </Layout>
-                }
-              </ThemeProvider>
-            </LocalizationProvider>
+            <SessionProvider session={session}>
+              <LocalizationProvider dateAdapter={AdapterDayjs} locale={locale || "en"}>
+                <ThemeProvider theme={getTheme()}>
+                  {!isSSR &&
+                    <Layout>
+                      <Component {...pageProps} />
+                    </Layout>
+                  }
+                </ThemeProvider>
+              </LocalizationProvider>
+            </SessionProvider>
           </AxiosInstanceProvider>
         </QueryClientProvider>
-      </IntlProvider>
+      </IntlProvider >
     </>
   )
 }

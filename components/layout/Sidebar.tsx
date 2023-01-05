@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { TextField, Box, Stack, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Container } from '@mui/material'
+import { Button, TextField, Box, Stack, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Container } from '@mui/material'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import TableViewIcon from '@mui/icons-material/TableView';
@@ -12,6 +12,7 @@ import Image from 'next/image';
 import moment, { Moment } from 'moment';
 import { useRouter } from 'next/router';
 import { Routes } from '../../interfaces/types';
+import { signOut, useSession } from "next-auth/react";
 
 interface IProps {
     intl: IntlShape;
@@ -27,6 +28,7 @@ const getMenu = (intl: IntlShape) => [
 ];
 
 const Sidebar: React.FC<IProps> = ({ intl, onClick, onClose }) => {
+    const { data: session } = useSession();
     const { push, query } = useRouter();
     const [date, setDate] = useState<Moment | null>((query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MM-DD-YYYY') : moment());
     const handleChange = (newValue: Moment | null) => {
@@ -68,6 +70,7 @@ const Sidebar: React.FC<IProps> = ({ intl, onClick, onClose }) => {
                     </Link>
                 ))}
             </List>
+            {session && <Button onClick={() => signOut({ redirect: false })}>Sign out</Button>}
         </Stack>
     );
 }
