@@ -31,6 +31,7 @@ async function dbConnect() {
     if (cached.conn) {
         return cached.conn
     }
+    console.log('Mongo - ', MONGODB_URI);
     if (!cached.promise) {
 
         cached.promise = mongoose.connect(MONGODB_URI || "").then(mongoose => {
