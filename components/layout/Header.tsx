@@ -1,11 +1,13 @@
-import { Stack, Typography, AppBar, Toolbar, IconButton, ListItemText, FormControl, InputLabel, Select, MenuItem, OutlinedInput, useRadioGroup } from '@mui/material'
+import { Stack, Typography, Box, Toolbar, IconButton, ListItemText, FormControl, InputLabel, Select, MenuItem, OutlinedInput, useRadioGroup } from '@mui/material'
 import { ReactElement, useEffect, useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
+import EnglishIcon from '../common/icons/EnglishIcon';
+import RussianIcon from '../common/icons/RussianIcon';
 
-const LANGUAGES = [{ text: "Русский", value: "ru", icon: "" }, { text: "English", value: "en", icon: "" }];
+const LANGUAGES = [{ content: <RussianIcon />, value: "ru", icon: "" }, { content: <EnglishIcon />, value: "en", icon: "" }];
 
 interface IProps {
     onOpenMenu: () => void
@@ -33,14 +35,14 @@ const Header: React.FC<IProps> = ({ onOpenMenu }) => {
                         {intl.formatMessage({ id: "head.title" })}
                     </Typography>
                 </Stack>
-                <FormControl sx={{ m: 1, width: 300 }}>
+                <FormControl sx={{ m: 1, width: 70 }}>
                     <Select
                         sx={{ bgcolor: "#FFF", ".MuiSelect-select": { p: "8px" } }}
                         value={language}
                         onChange={(e) => setLanguage(e.target.value)}
                     >
                         {LANGUAGES.map(v => (
-                            <MenuItem key={v.value} value={v.value}>{v.text}</MenuItem>
+                            <MenuItem key={v.value} value={v.value}><Stack>{v.content}</Stack></MenuItem>
                         ))}
                     </Select>
                 </FormControl>
