@@ -45,7 +45,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
   useEffect(() => {
     setIsSSR(false);
   }, []);
-  console.log(7777, session);
+
   return (
     <>
       <IntlProvider locale={locale || "en"} messages={messages[locale || "en"]}>
