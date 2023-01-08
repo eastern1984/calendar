@@ -21,3 +21,9 @@ export const deskTopDrawer: SxProps<Theme> = {
     },
 };
 
+export const datePicker: SxProps<Theme> = {
+    '& .MuiPickersDay-dayOutsideMonth': {
+        color: "#6a6a6a5c"
+    },
+};
+

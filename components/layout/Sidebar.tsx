@@ -13,6 +13,7 @@ import moment, { Moment } from 'moment';
 import { useRouter } from 'next/router';
 import { Routes } from '../../interfaces/types';
 import { signOut, useSession } from "next-auth/react";
+import { datePicker } from "./styles";
 
 interface IProps {
     intl: IntlShape;
@@ -49,12 +50,19 @@ const Sidebar: React.FC<IProps> = ({ intl, onClick, onClose }) => {
                 <Image src={intl.formatMessage({ id: "logo" })} width="210" height="35" alt="Logo" />
             </Box>
             <Divider />
-            <StaticDatePicker
-                displayStaticWrapperAs="desktop"
-                value={date}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-            />
+            <Box sx={datePicker}>
+                <StaticDatePicker
+                    showDaysOutsideCurrentMonth
+                    displayStaticWrapperAs="desktop"
+                    value={date}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField  {...params} />}
+                /*  renderDay={(day, selected, DayProps) => {
+                      console.log(DayProps);
+                      return <Box>1</Box>
+                  }}*/
+                />
+            </Box>
             <Divider />
             <List>
                 {getMenu(intl).map(v => (
