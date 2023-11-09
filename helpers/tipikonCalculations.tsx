@@ -82,8 +82,8 @@ export const getWeeksToNextEaster = (date: Moment) => {
 }
 
 export const getReadings = (date: Moment) => {
-    const readings = READINGS_TABLE[getDaysFromEaster(date)].split('|');
-    return { apostol: readings[0], gospel: readings[1] };
+    const readings = READINGS_TABLE[getDaysFromEaster(date)]?.split('|');
+    return { apostol: readings && readings[0], gospel: readings && readings[1] };
 }
 
 export const getWeekInfo = (date: Moment) => {

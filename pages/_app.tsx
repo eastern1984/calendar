@@ -38,14 +38,19 @@ export const messages: any = {
   en,
 };
 
-export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>) {
+export async function getServerSideProps(context: any) {
+  console.log(4444444);
+  return { props: { test: 123567 } }
+}
+
+export default function App({ Component, pageProps: { session, ...pageProps }, ...props }: AppProps<{ session: Session }>) {
   const { locale } = useRouter();
   const [isSSR, setIsSSR] = useState(true);
 
   useEffect(() => {
     setIsSSR(false);
   }, []);
-
+  console.log('---------------------------------', props);
   return (
     <>
       <IntlProvider locale={locale || "en"} messages={messages[locale || "en"]}>

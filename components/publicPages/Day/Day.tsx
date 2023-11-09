@@ -9,11 +9,11 @@ import moment from 'moment';
 interface IProps {
 }
 
-const Day: React.FC = ({ }) => {
+const Day: React.FC = (props) => {
     const { query } = useRouter();
     const date = (query.month && query.year && query.day) ? moment(`${query.month}-${query.day}-${query.year}`, 'MM-DD-YYYY') : moment();
     const { data, isFetching } = useGetDayQuery(date.format('YYYY'), date.format('MM'), date.format('DD'));
-
+    console.log(123321, props);
     return (
         <Box position="relative">
             {isFetching && <BackDrop />}
