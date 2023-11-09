@@ -11,7 +11,7 @@ export async function getServerSideProps(context: any) {
   }
 }
 
-export default function Home(props) {
+export default function Home(props: any) {
   console.log(112233123, props);
   return (
     <>
